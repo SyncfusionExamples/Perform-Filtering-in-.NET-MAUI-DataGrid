@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:Filtering_MAUI_DataGrid"
+             x:Class="Filtering_MAUI_DataGrid.MainPage">
+    
+    <ContentPage.BindingContext>
+        <local:OrderInfoRepo />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+            <Label Text="Filter Options:  " VerticalOptions="Center" Margin="3"/>
+            
+            <Picker x:Name="columns" Margin="3" WidthRequest="100">
+                <Picker.Items>
+                    <x:String>All columns</x:String>
+                    <x:String>OrderID</x:String>
+                    <x:String>Customer</x:String>
+                    <x:String>CustomerID</x:String>
+                    <x:String>ShipCountry</x:String>
+                    <x:String>ShipCity</x:String>
+                </Picker.Items>
+                <Picker.SelectedItem>
+                    <x:String>OrderID</x:String>
+                </Picker.SelectedItem>
+            </Picker>
+            
+            <Picker x:Name="conditions" Margin="3" WidthRequest="100">
+                <Picker.Items>
+                    <x:String>Equals</x:String>
+                    <x:String>Does Not Equal</x:String>
+                    <x:String>Contains</x:String>
+                </Picker.Items>
+                <Picker.SelectedItem>
+                    <x:String>Equals</x:String>
+                </Picker.SelectedItem>
+            </Picker>
+        </StackLayout>
+
+        <SearchBar x:Name="filterText"
+                   Placeholder="Search here to filter"
+                   SearchButtonPressed="SearchButton_Pressed" 
+                   TextChanged="FilterTextChanged"/>
+
+        <syncfusion:SfDataGrid x:Name="dataGrid" ItemsSource="{Binding Orders}"
+                               AutoGenerateColumnsMode="None"
+                               GridLinesVisibility="Both"
+                               HeaderGridLinesVisibility="Both"
+                               ColumnWidthMode="Auto">
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:DataGridTextColumn MappingName="OrderID"
+                                               HeaderText="Order ID"></syncfusion:DataGridTextColumn>
+                <syncfusion:DataGridTextColumn MappingName="Customer"
+                                               HeaderText="Name"></syncfusion:DataGridTextColumn>
+                <syncfusion:DataGridTextColumn MappingName="ShipCountry"
+                                               HeaderText="Country"></syncfusion:DataGridTextColumn>
+                <syncfusion:DataGridTextColumn MappingName="CustomerID"
+                                               HeaderText="Customer ID"></syncfusion:DataGridTextColumn>
+                <syncfusion:DataGridTextColumn MappingName="ShipCity"
+                                               HeaderText="City"></syncfusion:DataGridTextColumn>
+
+            </syncfusion:SfDataGrid.Columns>
+
+        </syncfusion:SfDataGrid>
+    </StackLayout>
+
+    </StackLayout>
+</ContentPage>
